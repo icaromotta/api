@@ -7,4 +7,4 @@ var schema = new mongoose.Schema({
   password: { type: String }
 });
 
-var User = mongoose.model("User", schema)
+var User = mongoose.model("User", schema)````
