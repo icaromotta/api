@@ -16,7 +16,6 @@ router.post('/create', (req, res) => {
   });
 });
 
-
 router.post('/login', (req, res) => {
 
   User.findOne({ email: req.body.email }, (err, user) => {
