@@ -44,12 +44,13 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 // mongoose.set('useNewUrlParser', true);
 // mongoose.set('useUnifiedTopology', true);
-// mongoose.connect("mongodb+srv://dbuser:q1w2e3r4@cluster0-ayxua.mongodb.net/db-lafter?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
-// mongoose.connection.on('error', (err) => {
-//   console.error(err);
-//   console.log('%s MongoDB connection error. Please make sure MongoDB is running.');
-//   process.exit();
-// });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connection.on('error', (err) => {
+  console.error(err);
+  console.log('%s MongoDB connection error. Please make sure MongoDB is running.');
+  process.exit();
+});
+console.log(process.env.MONGODB_URI)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
