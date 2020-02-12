@@ -5,6 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+
+dotenv.config({ path: '.env' });
 
 // Models
 require('./models/User')
@@ -39,14 +42,14 @@ app.use('/users', usersRouter);
  */
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
-// mongoose.connect('mongodb://localhost:27017/look-after');
-// mongoose.connection.on('error', (err) => {
-//   console.error(err);
-//   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
-//   process.exit();
-// });
+// mongoose.set('useNewUrlParser', true);
+// mongoose.set('useUnifiedTopology', true);
+mongoose.connect("mongodb+srv://dbuser:q1w2e3r4@cluster0-ayxua.mongodb.net/db-lafter?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connection.on('error', (err) => {
+  console.error(err);
+  console.log('%s MongoDB connection error. Please make sure MongoDB is running.');
+  process.exit();
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
