@@ -2,9 +2,9 @@ var mongoose = require('mongoose')
 
 var schema = new mongoose.Schema({
   name: { type: String },
-  phone: { type: String },
   email: { type: String },
-  password: { type: String },
+  subject: { type: String },
+  message: { type: String },
   createdOn: {
     type: Date,
     'default': Date.now
@@ -12,4 +12,4 @@ var schema = new mongoose.Schema({
   updatedAt: { type: Date }
 });
 
-var User = mongoose.model("User", schema)
+var Contact = mongoose.model("Contact", schema)

@@ -11,11 +11,13 @@ dotenv.config({ path: '.env' });
 
 // Models
 require('./models/User')
+require('./models/Contact')
 
 const mongoose = require('mongoose')
 // Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var utilsRouter = require('./routes/utils');
 
 var app = express();
 
@@ -36,21 +38,19 @@ app.use(cors())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/utils', utilsRouter);
 
 /**
  * Connect to MongoDB.
  */
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-// mongoose.set('useNewUrlParser', true);
-// mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.');
   process.exit();
 });
-console.log(process.env.MONGODB_URI)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

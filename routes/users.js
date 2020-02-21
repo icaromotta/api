@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-var User = mongoose.model("User");
+const User = mongoose.model("User");
 
 router.post('/create', (req, res) => {
+
+  // TODO: Mover codigo pra controller
+  // TODO: Verificar se user existe
+
   let user = new User({
     name: req.body.name,
     phone: req.body.phone,
