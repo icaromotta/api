@@ -1,7 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
-const User = mongoose.model("User");
+const express = require('express')
+const router = express.Router()
+const mongoose = require('mongoose')
+const User = mongoose.model("User")
+const { sign, verify } = require('../config/jwt')
 
 router.post('/create', (req, res) => {
 
@@ -14,9 +15,15 @@ router.post('/create', (req, res) => {
     email: req.body.email,
     password: req.body.password
   });
+
+  const token = sign({ user: user.id })
+
   user.save((err) => {
     if (err) return handleError(err);
-    res.send({ ok: true })
+    res.send({
+      user,
+      token
+    })
   });
 });
 
